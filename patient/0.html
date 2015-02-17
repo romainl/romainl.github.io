@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>The Patient Vimmer — Before we begin</title>
+<title>The Patient Vimmer — An introduction</title>
 <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen">
 </head>
 <body>
@@ -213,7 +213,7 @@ Get specific help:  It is possible to go directly to whatever you want help
 
 <p>Anyway, making Vim <em>a little bit</em> more comfortable is a quick and easy exercise that will give us many opportunities to learn useful things: let’s do it step by step, one problem at a time.</p>
 
-<h2>Problem #0 — Vi compatibility</h2>
+<h2>Problem 0 — Vi compatibility</h2>
 
 <p>The closest we have from a definitive list of <code>vi</code>-compatible behaviors can be found at <code>:help 'cpoptions'</code>. A quick glance at that table should be enough to understand the importance of dropping <code>vi</code>-compatibility for intensive use.</p>
 
@@ -257,7 +257,7 @@ $ vim .vimrc          C:vim _vimrc
 
 <p>NB: The very existence of that file makes adding <code>set nocompatible</code> to our <code>vimrc</code> generally useless so… don’t put that at the top of your <code>vimrc</code> like many sample <code>vimrc</code>s and blog posts tell you to do. An explicit <code>set nocompatible</code> can have interesting effects in <em>some</em> situations but they are honestly too rare to care.</p>
 
-<h2>Problem #1 — Backspace</h2>
+<h2>Problem 1 — Backspace</h2>
 
 <p>So you may or may not have noticed that the backspace key doesn’t really work as expected in vanilla Vim. Thankfully, this can be changed easily with the <code>'backspace'</code> option.</p>
 
@@ -288,7 +288,7 @@ $ vim .vimrc          C:vim _vimrc
 :help c_%
 </code></pre>
 
-<h2>Problem #2 — Automatic indentation</h2>
+<h2>Problem 2 — Automatic indentation</h2>
 
 <p>Next comes automatic indentation. This one is more of a <em>comfort</em> thing but how are we supposed to be efficient at text editing if we are forced to adjust the indent of every new line manually?</p>
 
@@ -320,7 +320,7 @@ $ vim .vimrc          C:vim _vimrc
 <pre><code>:help 'autoindent'
 </code></pre>
 
-<h2>Problem #3 — Dealing with multiple files</h2>
+<h2>Problem 3 — Dealing with multiple files</h2>
 
 <p>Vim will refuse to edit another file when there are unsaved changes in the current buffer, leaving us with a cornelian dilemma: write that buffer or abandon our changes.</p>
 
@@ -346,7 +346,7 @@ $ vim .vimrc          C:vim _vimrc
 :help :bar
 </code></pre>
 
-<h2>Problem #4 — Syntax highlighting</h2>
+<h2>Problem 4 — Syntax highlighting</h2>
 
 <p>Syntax highlighting is a staple of programming. It helps readability, eye-comfort, bug-fixing… and it’s pretty. Well, it <em>can</em> be pretty.</p>
 
@@ -367,7 +367,7 @@ $ vim .vimrc          C:vim _vimrc
 :help history
 </code></pre>
 
-<h2>Problem #5 — Line numbers</h2>
+<h2>Problem 5 — Line numbers</h2>
 
 <p>Line numbers is another feature people are attached to them and it’s very easy to enable.</p>
 
@@ -383,7 +383,7 @@ $ vim .vimrc          C:vim _vimrc
 <pre><code>:help 'number'
 </code></pre>
 
-<h2>Problem #6 — Huge tabs</h2>
+<h2>Problem 6 — Huge tabs</h2>
 
 <p>Vim follows the de-facto standard of 8 spaces but we, programmers, <em>need</em> our 4 or 2 character-wide indentation, don’t we? <code>:help 'tabstop'</code> does a good job of explaining what strategy to adopt when dealing with tab-width. The strategy I recommend is to keep the default <code>'tabstop'</code> and only adjust <code>'shiftwidth'</code> and <code>'softtabstop'</code>.</p>
 
@@ -433,33 +433,11 @@ let &amp;softtabstop = &amp;shiftwidth
   <h6>The Patient Vimmer</h6>
   <ul>
     <li>
-      <a href="">foo bar baz</a>
-    </li>
-    <li>
-      <a href="">foo bar baz</a>
-    </li>
-    <li>
-      <a href="">foo bar baz</a>
-    </li>
-    <li>
-      <a href="">foo bar baz</a>
-    </li>
-    <li>
-      <a href="">foo bar baz</a>
-    </li>
-    <li>
-      <a href="">foo bar baz</a>
-    </li>
-    <li>
-      <a href="">foo bar baz</a>
-    </li>
-    <li>
-      <a href="">foo bar baz</a>
+      <a href="">0 — An introduction</a>
     </li>
   </ul>
-  <p>Written by Romain Lafourcade.</p>
-  <p>Hosted on GitHub.</p>
-  <p>Many thanks to Barry Arthur.</p>
+  <p>Written by Romain Lafourcade with the help of Barry Arthur.</p>
+  <p>Copyleft 2015</p>
 </footer>
 </body>
 </html>
