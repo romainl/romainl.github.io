@@ -1,0 +1,431 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Before we begin</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+</head>
+<body>
+
+<p>Our first contact with vim is always frustrating: the incapacity to type text right away, the non-obvious commands for writing and quitting…</p>
+
+<p>Most of us bail out and learn to mentally replace <code>vi</code> and <code>vim</code> with <code>nano</code> in every tutorial they read.</p>
+
+<p>Others learn the bare minimum to make those occasional edits as painless as possible, confident in their knowledge that there are vastly better editors for serious work anyway.</p>
+
+<p>The rest are lucky/crazy enough to see the potential behind the weirdness and decide to do what it takes to become more efficient with Vim.</p>
+
+<p>This guide is directed toward that third group. Picking up where <code>vimtutor</code> left off, it will hopefully give your Vim experience the right kind of foundations: deep and dependable.</p>
+
+<p>Vim does a lot and thus requires quite a bit of learning as well as a significative amount of will and <em>patience</em>. In that respect, it isn’t worse than Photoshop, any serious 3D modeling software, font editor or digital audio workstation: you can quickly learn the basics needed for performing simple tasks but you can’t honestly put “ProTools” on your resumé after a tutorial or two.</p>
+
+<p>But what kind of involvement are we talking about? Is it the kind that requires us to commit all of <a href="http://www.viemu.com/vi-vim-cheat-sheet.gif">that meaningless garbage</a> to memory?</p>
+
+<p>No. I don’t believe “knowing all of Vim” or “being a Vim guru” should be anyone’s goal. Those are <em>consequences</em> of using Vim daily for 10 or 20 years, maybe. But the real <em>goal</em> is in my opinion much less visible, much less quantifiable: we should learn Vim because it helps us being better at what we do, not because we want to reach a grand goal. And, well… I don’t even believe anybody <em>should</em> learn Vim at all.</p>
+
+<p>Learning Vim is a long journey where the destination doesn’t really matter. What happens along the way and the positive changes it causes in us is all that counts.</p>
+
+<p>You are playing in your own Tolkien trilogy, goddammit!</p>
+
+<h1>Before we begin</h1>
+
+<p>The rest of this guide will assume three things:</p>
+
+<ul>
+<li>that you are comfortable with the command-line,</li>
+<li>that you have already followed <code>vimtutor</code> and have a bit of firsthand experience with Vim,</li>
+<li>that you have access to a reasonably up-to-date Vim build.</li>
+</ul>
+
+
+<p>The default Vim on your system — if you have one — is usually a very small build that lacks useful features for serious usage. While this isn’t a huge deal in principle, those missing features can be source of frustration if you intend to use Vim <em>seriously</em>, as your main text editor.</p>
+
+<p>I therefore recommend you upgrade to a more up-to-date and full-featured build. How to do that depend on your platform.</p>
+
+<h2>On Linux/BSD</h2>
+
+<p>On Linux/BSD systems, the trick is generally to install the more featured “gvim” package, which gives you both a <code>vim</code> command for terminal usage and a <code>gvim</code> command for GUI usage.</p>
+
+<p>You may need slightly different packages depending on your Desktop Environment or even distribution variant. There are too many possibilities so… use your package manager and common-sense to decide what to install. for any issue, refer to your package manager’s documentation.</p>
+
+<h3>Arch</h3>
+
+<pre><code>$ sudo pacman -Sy
+$ sudo pacman -R vim
+$ sudo pacman -S gvim
+</code></pre>
+
+<h3>Debian</h3>
+
+<pre><code>$ sudo apt-get update
+$ sudo apt-get install vim-gnome
+</code></pre>
+
+<h3>Gentoo</h3>
+
+<pre><code>$ sudo emerge --sync
+$ sudo emerge app-editors/gvim
+</code></pre>
+
+<h3>RedHat</h3>
+
+<pre><code>$ sudo yum check-update
+$ sudo yum install vim-enhanced
+</code></pre>
+
+<h3>Slackware</h3>
+
+<pre><code>$ sudo slackpkg update
+$ sudo slackpkg install-new vim-gvim
+</code></pre>
+
+<p>TODO TODO TODO</p>
+
+<h3>OpenBSD</h3>
+
+<pre><code>$ sudo pkg_add vim-x11
+</code></pre>
+
+<h3>FreeBSD</h3>
+
+<pre><code>$ sudo pkg install editors/vim
+</code></pre>
+
+<p>TODO TODO TODO</p>
+
+<h2>On Mac OS X</h2>
+
+<p>MacVim, the most complete Vim you could get on Mac OS X, comes with both a GUI version <em>and</em> a CLI version. All the methods below should give you a regular “double-clickable” Mac OS X app and a <code>mvim</code> command you can run in a terminal emulator without messing with the default Vim:</p>
+
+<pre><code>$ mvim        " opens a new GUI MacVim instence
+$ mvim -v     " opens a new CLI MacVim instence
+</code></pre>
+
+<h3>Regular install</h3>
+
+<ol>
+<li><p>Download and install <a href="https://github.com/b4winckler/macvim/releases">an official snapshot</a> like you would with any other Mac OS X application.</p></li>
+<li><p>Place the <code>mvim</code> script that is bundled with MacVim somewhere in your <code>$PATH</code>.</p></li>
+</ol>
+
+
+<h3>Package manager</h3>
+
+<ul>
+<li><p><strong>MacPorts:</strong></p>
+
+<pre><code>  $ sudo port selfupdate
+  $ sudo port install macvim
+</code></pre></li>
+<li><p><strong>Homebrew:</strong></p>
+
+<pre><code>  $ brew install macvim
+</code></pre></li>
+</ul>
+
+
+<h2>On Windows</h2>
+
+<p>There is no Vim on your machine by default so you are forced to install it anyway. The default download from <a href="http://wwww.vim.org">vim.org</a> is OK but slightly outdated. You can get more up-to-date and complete builds from these projects:</p>
+
+<ul>
+<li><p><a href="http://sourceforge.net/projects/cream/files/Vim/">Cream</a></p></li>
+<li><p><a href="http://tuxproject.de/projects/vim/">Tuxproject</a></p></li>
+</ul>
+
+
+<h1>The mother of all commands</h1>
+
+<p>Every complex software comes with an extensive documentation and Vim is no stranger to that rule. Learning how to use that documentation is the first and most important step on your way to “edit at the speed of thought” or “becoming a vim ninja” or making your editor look like a christmas tree in Las Vegas.</p>
+
+<p>Learning how to use the documentation makes you self-reliant. With self-reliance comes confidence and with confidence comes efficiency.</p>
+
+<p>So, without further ado, let me introduce you to Vim’s amazing…</p>
+
+<pre><code>:help
+</code></pre>
+
+<p>The introduction is short, factual and shock-full of important information; let me print here the most useful parts:</p>
+
+<pre><code>Jump to a subject:  Position the cursor on a tag (e.g. |bars|) and hit CTRL-].
+   With the mouse:  ":set mouse=a" to enable the mouse (in xterm or GUI).
+                    Double-click the left mouse button on a tag, e.g. |bars|.
+        Jump back:  Type CTRL-T or CTRL-O (repeat to go further back).
+
+Get specific help:  It is possible to go directly to whatever you want help
+                    on, by giving an argument to the :help command.
+                    It is possible to further specify the context:
+
+                          WHAT                 PREPEND     EXAMPLE
+                      Normal mode command     (nothing)    :help x
+                      Visual mode command        v_        :help v_u
+                      Insert mode command        i_        :help i_&lt;Esc&gt;
+                      Command-line command       :         :help :quit
+                      Command-line editing       c_        :help c_&lt;Del&gt;
+                      Vim command argument       -         :help -r
+                      Option                     '         :help 'textwidth'
+
+  Search for help:  Type ":help word", then hit CTRL-D to see matching
+                    help entries for "word".
+                    Or use ":helpgrep word".
+</code></pre>
+
+<p>That’s it! You are now capable of searching Vim’s documentation for anything and ready to explore a few interesting areas. Again, the focus of this guide is <em>not</em> on rote learning. Skim these sections, get a feel of how they are organized, of the vocabulary, of the extend of Vim’s features… but don’t learn everything; there’s absolutely no point doing that.</p>
+
+<ul>
+<li><p><strong>Keys</strong></p>
+
+<pre><code>  :help key-notation
+</code></pre></li>
+<li><p><strong>Normal mode commands</strong></p>
+
+<pre><code>  :help normal-index
+</code></pre></li>
+<li><p><strong>Visual mode commands</strong></p>
+
+<pre><code>  :help visual-index
+</code></pre></li>
+<li><p><strong>Insert mode commands</strong></p>
+
+<pre><code>  :help insert-index
+</code></pre></li>
+<li><p><strong>Ex commands</strong></p>
+
+<pre><code>  :help ex-cmd-index
+</code></pre></li>
+<li><p><strong>Various points of interest</strong></p>
+
+<pre><code>  :help navigation
+  :help quickref
+  :help vim-modes
+</code></pre></li>
+</ul>
+
+
+<h1>Making Vim more friendly</h1>
+
+<p>As is, even a “huge” build with plenty of developer-friendly features is still the frustratingly alien editor we are used to.</p>
+
+<p>What happens, here, is that Vim is just being humble and professional. Its role is to act as a stand-in for old <code>vi</code> and it tries its best to look and behave like its model… to the point of being as obnoxious the original.</p>
+
+<p>Or <em>more</em>, if we consider all the <em>improvements</em> hidden behind that impenetrable <code>vi</code> persona.</p>
+
+<p>Vim’s support files are often tweaked by distribution maintainers to comply to whatever standard — written or not — they have to follow or to fit Vim into their specific file hierarchy or — how kind of them — make the default behavior <em>slightly</em> more useful. This means that Vim’s “runtime” can be in many places and that the system <code>vimrc</code> — if there is one — may or may not already contain solutions to some of the problems below. I will assume no system <code>vimrc</code> to keep this guide simple.</p>
+
+<p>Anyway, making Vim <em>a little bit</em> more comfortable is a quick and easy exercise that will give us many opportunities to learn useful things: let’s do it step by step, one problem at a time.</p>
+
+<h2>Problem #0 — Vi compatibility</h2>
+
+<p>The closest we have from a definitive list of <code>vi</code>-compatible behaviors can be found at <code>:help 'cpoptions'</code>. A quick glance at that table should be enough to understand the importance of dropping <code>vi</code>-compatibility for intensive use.</p>
+
+<p>The <code>'compatible'</code> option being enabled by default, Vim <em>always</em> start in what we will call “compatible mode” and never comes back to its senses unless instructed to do so. There are three ways to disable “compatible mode”:</p>
+
+<ol>
+<li><p>The first way consists in typing this command:</p>
+
+<pre><code> :set nocompatible
+</code></pre>
+
+<p>every time we start Vim to set <code>'cpoptions'</code> and many other options to their “Vim” value.</p></li>
+<li><p>The second way consists in using a command-line flag to tell Vim to start in “nocompatible mode”:</p>
+
+<pre><code> $ vim -N
+</code></pre></li>
+<li><p>The two solutions above may be OK for infrequent, quick, sessions but we are trying to use Vim as our main editor so they rather obviously don’t scale. Let’s see a third way: creating our very own <code>vimrc</code>.</p>
+
+<p>Vim’s user-level configuration file is called <code>.vimrc</code> on Unix-like systems and <code>_vimrc</code> on Windows. During the startup procedure, Vim looks for that file in a couple of standard locations; as soon as it is found, the <code>'compatible'</code> option is disabled, just like if you typed <code>:set nocompatible</code>.</p>
+
+<p>We will simply create that file in order to never have to type that command again.</p>
+
+<p>In addition to force Vim to start in “nocompatible mode”, creating an empty <code>vimrc</code> will serve another important purpose: <em>receive all our future mappings and settings.</em></p>
+
+<p>NB: The very existence of that file makes adding <code>set nocompatible</code> to our <code>vimrc</code> generally useless so… don’t put that at the top of your <code>vimrc</code> like many sample <code>vimrc</code>s and blog posts tell you to do. An explicit <code>set nocompatible</code> can have interesting effects in <em>some</em> situations but they are honestly too rare to care.</p></li>
+</ol>
+
+
+<h3>Solution</h3>
+
+<pre><code>Unix                  Windows
+
+$ cd                  C:cd %userprofile%
+$ vim .vimrc          C:vim _vimrc
+</code></pre>
+
+<h3>Reference</h3>
+
+<pre><code>:help 'compatible'
+:help 'cpoptions'
+:help startup
+:help vimrc-intro
+</code></pre>
+
+<h2>Problem #1 — Backspace</h2>
+
+<p>So you may or may not have noticed that the backspace key doesn’t really work as expected in vanilla vim. Thankfully, this can be changed easily with the <code>'backspace'</code> option.</p>
+
+<h3>Solution</h3>
+
+<p>Add this line to your newly created <code>vimrc</code>:</p>
+
+<pre><code>set backspace=indent,eol,start
+</code></pre>
+
+<p>write the file to disk:</p>
+
+<pre><code>:write
+</code></pre>
+
+<p>and source it with:</p>
+
+<pre><code>:source %
+</code></pre>
+
+<p>When used as argument for an Ex command, <code>%</code> is replaced before execution by the current file name so <code>:source %</code> is exactly the same as <code>:source ~/.vimrc</code>, except a lot shorter <em>and</em> generic. That will certainly come handy!</p>
+
+<h3>Reference</h3>
+
+<pre><code>:help 'backspace'
+:help :write
+:help :source
+:help c_%
+</code></pre>
+
+<h2>Problem #2 — Automatic indentation</h2>
+
+<p>Next comes automatic indentation. This one is more of a <em>comfort</em> thing but how are we supposed to be efficient at text editing if we are forced to adjust the indent of every new line manually?</p>
+
+<p>It turns out Vim has got a bunch of automatic indentation mechanisms, none of which enabled by default. The most basic, <code>'autoindent'</code>, doesn’t try to be too smart or do different things for different filetypes… That’s all we need for now.</p>
+
+<h3>Solution</h3>
+
+<p>Add this line to your <code>vimrc</code>:</p>
+
+<pre><code>set autoindent
+</code></pre>
+
+<p>write the file to disk:</p>
+
+<pre><code>:w
+</code></pre>
+
+<p>and source it with:</p>
+
+<pre><code>:so %
+</code></pre>
+
+<p>Most Ex commands and options can be shortened to a couple of letters — which undoubtedly make things easier to type. Short names are a must on the command-line!</p>
+
+<p>In configuration files and scripts, though, the short form can be hard to read and doesn’t provide any benefit over the long form so don’t use it, your future self will thank you.</p>
+
+<h3>Reference</h3>
+
+<pre><code>:help 'autoindent'
+</code></pre>
+
+<h2>Problem #3 — Dealing with multiple files</h2>
+
+<p>Vim will refuse to edit another file when there are unsaved changes in the current buffer, leaving us with a cornelian dilemma: write that buffer or abandon our changes.</p>
+
+<p>Thanks for watching our back, Vim, but that feature can really slow us down! Luckily, we have a <code>'hidden'</code> option for that (pun intended).</p>
+
+<h3>Solution</h3>
+
+<p>Add this line to your <code>vimrc</code>:</p>
+
+<pre><code>set hidden
+</code></pre>
+
+<p>and do the <code>:write</code>/<code>:source</code> dance again, but in one go this time:</p>
+
+<pre><code>:w|so %
+</code></pre>
+
+<p>In Vim’s command-line, the vertical bar allows us to chain Ex commands. While it looks the same, the “bar” is <em>not</em> the equivalent of a Unix “pipe”, if only because no data is sent from one command to the next.</p>
+
+<h3>Reference</h3>
+
+<pre><code>:help 'hidden'
+:help :bar
+</code></pre>
+
+<h2>Problem #4 — Syntax highlighting</h2>
+
+<p>Syntax highlighting is a staple of programming. It helps readability, eye-comfort, bug-fixing… and it’s pretty. Well, it <em>can</em> be pretty.</p>
+
+<p>Vim does syntax highlighting, of course, but the feature isn’t enabled by default because <code>vi</code> didn’t have it. Thankfully, it’s easy to turn on.</p>
+
+<h3>Solution</h3>
+
+<p>Add this line to your <code>vimrc</code>:</p>
+
+<pre><code>syntax on
+</code></pre>
+
+<p>and… type <code>:</code> then press the <code>&lt;Up&gt;</code> key to recall the latest Ex command. Vim remembers 20 commands by default so I know someone who will fall in love with his/her <code>&lt;Up&gt;</code> key…</p>
+
+<h3>Reference</h3>
+
+<pre><code>:help :syntax-on
+:help history
+</code></pre>
+
+<h2>Problem #5 — Line numbers</h2>
+
+<p>Line numbers is another feature people are attached to them it’s very easy to enable them.</p>
+
+<h3>Solution</h3>
+
+<p>Add this line to your <code>vimrc</code>:</p>
+
+<pre><code>set number
+</code></pre>
+
+<h3>Reference</h3>
+
+<pre><code>:help 'number'
+</code></pre>
+
+<h2>Problem #6 — Huge tabs</h2>
+
+<p>Vim follows the de-facto standard of 8 spaces but we, programers, <em>need</em> our 4 or 2 characters-wide indentation, don’t we? <code>:help 'tabstop'</code> does a good job explaining what strategy to adopt when dealing with tab-width. The stategy I recommend is to keep the default <code>'tabstop'</code> and only adjust <code>'shiftwidth'</code> and <code>'softtabstop'</code>.</p>
+
+<h3>Solution</h3>
+
+<p>Add these lines to your <code>vimrc</code>, using the value you want:</p>
+
+<pre><code>set shiftwidth=4
+set softtabstop=4
+</code></pre>
+
+<p>and, if you need spaces instead of tabs:</p>
+
+<pre><code>set expandtab
+</code></pre>
+
+<h3>Reference</h3>
+
+<pre><code>:help 'tabstop'
+:help 'shiftwidth'
+:help 'softtabstop'
+:help 'expandtab'
+</code></pre>
+
+<h1>That’s it</h1>
+
+<p>Our short <code>vimrc</code> already gives us most of the comfort we sorely missed each time we had to use <code>vim</code> to edit those configuration files.</p>
+
+<p>This quick exercise helped us learn:</p>
+
+<ul>
+<li>how to use Vim’s online documentation,</li>
+<li>how to recall command history,</li>
+<li>how to chain commands together,</li>
+<li>how to reference the current file on the command-line,</li>
+<li>that we can shorten commands and options.</li>
+</ul>
+
+
+<p>I would say we are doing good, here.</p>
+</body>
+</html>
