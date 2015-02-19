@@ -2,6 +2,7 @@ body {
   background-image: url('../images/avatar.png');
   background-repeat: repeat;
   background-position: top left;
+  background-color: #f0f0f0;
 }
 div {
   background-color: #f0f0f0;
